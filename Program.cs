@@ -1,11 +1,19 @@
 ﻿using System;
+using System.Globalization;
 namespace LGPD
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
             Pessoa pessoa = new Pessoa();
+
+            Console.Write("Nome: ");
+            pessoa.Nome = Console.ReadLine();
+            pessoa.Nome = textInfo.ToTitleCase(pessoa.Nome);
+
             Console.WriteLine("Digite o seu CPF:");
             pessoa.Cpf = Console.ReadLine();
 
@@ -18,6 +26,7 @@ namespace LGPD
 
         class Pessoa
         {
+            public string Nome; 
             public string Cpf;
             public bool DadosPrivados;
 
@@ -63,12 +72,12 @@ namespace LGPD
                 if (DadosPrivados)
                 {
                     Console.WriteLine("------------------Dados Privados-------------------------------");
-                    Console.WriteLine($"CPF: {CpfMascarado(Cpf)} \nDados Privados: {RetonoDadosPrivados(DadosPrivados)} ");
+                    Console.WriteLine($"Nome: {Nome} \nCPF: {CpfMascarado(Cpf)} \nDados Privados: {RetonoDadosPrivados(DadosPrivados)} ");
                 }
                 else
                 {
                     Console.WriteLine("------------------Dados não Privados---------------------------");
-                    Console.WriteLine($"CPF: {CpfFormatado(Cpf)} \ndados privados: {RetonoDadosPrivados(DadosPrivados)}");
+                    Console.WriteLine($"Nome: {Nome} \nCPF: {CpfFormatado(Cpf)} \ndados privados: {RetonoDadosPrivados(DadosPrivados)}");
                 }
 
             }
